@@ -29,14 +29,6 @@ AZURE_STORAGE_ACCESS_KEY=""
 AZURE_STORAGE_SAS=""
 AZURE_KEY_VAULT="onebranchkeyvault"
 
-if [ "$1" = "create_container_registry" ]; then
-	function_create_container_registry
-elif [ "$1" = "create_container" ]; then
-	function_create_docker_container
-elif [ "$1" = "delete_container" ]; then
-	function_delete_containers
-fi
-
 
 function_create_resource_group() {
 	# 1. Creating the resource group
@@ -72,7 +64,7 @@ function_create_container_registry() {
 	dockerimage="microsoft:dotnetcore"
 
 	echo "\n Building docker image $dockerimage from $DOCKER_FILE"
-	az acr build -r $AZURE_CONTAINER_REGISTRY -f $DOCKER_FILE -t $dockerimage .
+	az acr build -r $AZURE_CONTAINER_REGISTRY -f $DOCKER_FILE -t $dockerimage ./SampleTestMap
 
 	# get list of images
 	echo "\n Listing out the available images"
@@ -109,6 +101,9 @@ function_create_docker_container() {
 	dockerimage="microsoft:dotnetcore"
 	containername="samplenetcore"
 
+	echo "\n Getting the storage access key"
+	AZURE_STORAGE_ACCESS_KEY=$(az storage account keys list --resource-group $AZURE_RESOURCE_GROUP --account-name $AZURE_STORAGE_ACCOUNT --query "[0].value" --output tsv)
+
 	echo "\n Bringing up container instance"
 	# create a new ACI instance to run this container
 	az container create \
@@ -137,3 +132,11 @@ function_delete_containers() {
 function_delete_resource_group() {
 	az group delete -n $AZURE_RESOURCE_GROUP --yes
 }
+
+if [ "$1" = "create_container_registry" ]; then
+	function_create_container_registry
+elif [ "$1" = "create_container" ]; then
+	function_create_docker_container
+elif [ "$1" = "delete_container" ]; then
+	function_delete_containers
+fi

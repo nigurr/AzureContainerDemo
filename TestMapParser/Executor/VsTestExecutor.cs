@@ -11,7 +11,7 @@ namespace TestMapParser
             var source = step.Path;
             var args = step.Args;
 
-            return $"dotnet vstest {source} {args}";
+            return $"dotnet vstest {source} {args} --logger:trx --ResultsDirectory:/share";
         }
     }
 }
