@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestJobGroup>
+  <ResourceSpec>
+    <Resource Image="node:11-alpine"/>
+  </ResourceSpec>
+  <TestJob Name="SampleJob">
+    <Execution Type="Jest" Path="[WorkingDirectory]\tests\Web" Args="*.js" />
+  </TestJob>
+  <Cleanup/>
+</TestJobGroup>

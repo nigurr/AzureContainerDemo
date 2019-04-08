@@ -1,0 +1,5 @@
+<TestMap>
+  <TestJobGroup Name="ApiTestGroup" TestSystem="Default" ConfigPath="apitestgroup.xml" IsActive="true"/>
+  <!--TestJobGroup Name="ModelTestGroup" TestSystem="Default" ConfigPath="modeltestgroup.xml" IsActive="true"/ -->
+  <!--TestJobGroup Name="ControllerTestGroup" TestSystem="Default" ConfigPath="webtestgroup.xml" IsActive="true"/ -->
+</TestMap>

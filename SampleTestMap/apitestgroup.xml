@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestJobGroup>
+  <ResourceSpec>
+    <Resource Image="microsoft/dotnet:2.2-sdk"/>
+  </ResourceSpec>
+  <TestJob Name="SampleJob">
+    <Execution Type="VsTest" Path="[WorkingDirectory]\share\SampleTest.dll" Args="" />
+  </TestJob>
+  <Cleanup/>
+</TestJobGroup>
