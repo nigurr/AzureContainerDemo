@@ -1,3 +1,5 @@
+#!/bin/bash
+
 <<'COMMENT'
 
 Functions
@@ -10,8 +12,10 @@ Functions
 	7. Delete Resource Group
 COMMENT
 
+# user command
+command=$1
 # User input values
-DOCKER_FILE=$1
+DOCKER_FILE=$2
 
 
 ## Universal vairables
@@ -24,6 +28,14 @@ AZURE_CONTAINER_REGISTRY="onebranchacr"
 AZURE_STORAGE_ACCESS_KEY=""
 AZURE_STORAGE_SAS=""
 AZURE_KEY_VAULT="onebranchkeyvault"
+
+if [ "$1" = "create_container_registry" ]; then
+	function_create_container_registry
+elif [ "$1" = "create_container" ]; then
+	function_create_docker_container
+elif [ "$1" = "delete_container" ]; then
+	function_delete_containers
+fi
 
 
 function_create_resource_group() {
